@@ -1,21 +1,13 @@
-import Checkbox from "expo-checkbox";
-import { useEffect, useState } from "react";
-import {
-    FlatList,
-    Keyboard,
-    Pressable,
-    StyleSheet,
-    Text,
-    View,
-} from "react-native";
-import { TaskItem } from "../../components/TaskItem";
-import { Task } from "../../model/task";
+import { useEffect, useState } from 'react';
+import { FlatList, Keyboard, Pressable, StyleSheet, Text, View } from 'react-native';
+
+import { FilterType, TaskFilter } from '../../components/TaskFilter';
+import { TaskItem } from '../../components/TaskItem';
+import { Task } from '../../model/task';
 
 export function Tasks() {
     const [tasks, setTasks] = useState<Task[]>();
-    const [filterAll, setFilterAll] = useState(true);
-    const [filterToDo, setFilterToDo] = useState(false);
-    const [filterDone, setFilterDone] = useState(false);
+
 
     useEffect(() => {
         const tasks = [
@@ -28,37 +20,10 @@ export function Tasks() {
         setTasks(tasks);
     }, []);
 
-    function filter(valueAll: boolean, valueToDo: boolean, valueDone: boolean) {
-        setFilterAll(valueAll);
-        setFilterToDo(valueToDo);
-        setFilterDone(valueDone);
-    }
-
     return (
         <Pressable style={styles.container} onPress={Keyboard.dismiss}>
-            <View style={styles.containerFilter}>
-                <View style={styles.section}>
-                    <Checkbox
-                        value={filterAll}
-                        onValueChange={() => filter(true, false, false)}
-                    />
-                    <Text>Todas</Text>
-                </View>
-                <View style={styles.section}>
-                    <Checkbox
-                        value={filterToDo}
-                        onValueChange={() => filter(false, true, false)}
-                    />
-                    <Text>A fazer</Text>
-                </View>
-                <View style={styles.section}>
-                    <Checkbox
-                        value={filterDone}
-                        onValueChange={() => filter(false, false, true)}
-                    />
-                    <Text>Feitas</Text>
-                </View>
-            </View>
+            <TaskFilter onPress={(filterType: FilterType) => alert(filterType)} />
+
             <View style={styles.containerTasks}>
                 <Text style={styles.titleToDo}>A fazer</Text>
                 <FlatList scrollEnabled={true}
@@ -87,18 +52,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "flex-start",
         paddingTop: 64
-    },
-    containerFilter: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        width: "100%",
-        paddingTop: 10,
-        paddingBottom: 10,
-    },
-    section: {
-        flexDirection: "row",
-        alignItems: "center",
-        gap: 10,
     },
     containerTasks: {
         flex: 1,
