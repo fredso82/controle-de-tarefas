@@ -44,21 +44,21 @@ export function TaskFilter(props: TaskFilterProps) {
     return (
         <View style={styles.container}>
             <View style={styles.section}>
-                <Checkbox
-                    value={filterAll}
+                <Checkbox style={styles.checkbox}
+                    value={filterAll}                    
                     onValueChange={() => filter(FilterType.All)}
                 />
                 <Text>Todas</Text>
             </View>
             <View style={styles.section}>
-                <Checkbox
+                <Checkbox style={styles.checkbox}
                     value={filterToDo}
                     onValueChange={() => filter(FilterType.ToDo)}
                 />
                 <Text>A fazer</Text>
             </View>
             <View style={styles.section}>
-                <Checkbox
+                <Checkbox style={styles.checkbox}
                     value={filterDone}
                     onValueChange={() => filter(FilterType.Done)}
                 />
@@ -80,4 +80,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
         gap: 10,
     },
+    checkbox: {
+        transform: [{scaleX: 1.2}, {scaleY: 1.2}],
+        
+    }
 });

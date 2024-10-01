@@ -1,21 +1,26 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { Task } from "../../model/task";
 import Checkbox from "expo-checkbox";
+import { useState } from "react";
 
 export interface TaskProps {
     task: Task;
     onPress: () => void;
-    onStatusChange: () => void;
+    onStatusChange: (taskChanged: Task) => void;
 }
 
 export function TaskItem(props: TaskProps) {
     return (
         <Pressable onPress={props.onPress} style={styles.container}>
-            <Checkbox
+            <Checkbox style={styles.checkbox}
                 value={props.task.done}
-                onValueChange={props.onStatusChange}
+                onValueChange={() => {
+                    props.onStatusChange(props.task);
+                }}
             />
-            <Text>{props.task.title}</Text>
+            {props.task.done && <Text style={{textDecorationLine: "line-through"}}>{props.task.title}</Text>}
+            {!props.task.done && <Text>{props.task.title}</Text>}
+            
         </Pressable>
     );
 }
@@ -29,6 +34,10 @@ const styles = StyleSheet.create({
         height: 48,
         width: "100%",
         paddingHorizontal: 20,
-        paddingVertical: 10
+        paddingVertical: 10,
+    },
+    checkbox: {
+        transform: [{scaleX: 1.1}, {scaleY: 1.1}],
+        borderRadius: 50
     }
-})
+});
