@@ -1,18 +1,19 @@
-import { useEffect, useState } from "react";
-import {
-    FlatList,
-    Keyboard,
-    Pressable,
-    StyleSheet,
-    Text,
-    View,
-} from "react-native";
+import { Feather } from '@expo/vector-icons';
+import { useEffect, useState } from 'react';
+import { FlatList, Keyboard, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-import { FilterType, TaskFilter } from "../../components/TaskFilter";
-import { TaskItem } from "../../components/TaskItem";
-import { Task } from "../../model/task";
+import { FilterType, TaskFilter } from '../../components/TaskFilter';
+import { TaskItem } from '../../components/TaskItem';
+import { Task } from '../../model/task';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../routes/routes';
+
+type Props = NativeStackScreenProps<RootStackParamList>;
 
 export function Tasks() {
+    const navigation = useNavigation<Props['navigation']>();
+
     const [tasks, setTasks] = useState<Task[]>();
     const [tasksToDo, setTasksToDo] = useState<Task[] | null>();
     const [tasksDone, setTasksDone] = useState<Task[] | null>();
@@ -94,6 +95,9 @@ export function Tasks() {
                     />
                 </View>
             )}
+            <TouchableOpacity style={styles.addTask} onPress={() => navigation.navigate('Task') }>
+                <Feather name='plus' size={40} color='white'></Feather>
+            </TouchableOpacity>
         </Pressable>
     );
 }
@@ -127,4 +131,18 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         marginBottom: 10,
     },
+    addTask: {
+        backgroundColor: "#FB621E",
+        height: 60,
+        width: 60,
+        borderRadius: 50,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "absolute",
+        bottom: "5%",
+        right: "5%",
+        shadowOffset: {width: 3, height: 4},        
+        elevation: 5
+    }
 });
