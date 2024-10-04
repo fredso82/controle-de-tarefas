@@ -11,8 +11,8 @@ export default function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Home" >
-                <Stack.Screen name="Home" component={Tasks} options={{headerShown: false}} /> 
-                <Stack.Screen name="Task" component={TaskAdd} />
+                <Stack.Screen name="Home" component={Tasks} options={{headerShown: false, title: "Tarefas"}} /> 
+                <Stack.Screen name="Task" component={TaskAdd} options={{title: "Nova Tarefa"}} />
             </Stack.Navigator>            
         </NavigationContainer>
 
