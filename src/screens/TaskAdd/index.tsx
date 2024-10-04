@@ -36,13 +36,23 @@ export function TaskAdd() {
                     onChangeText={(text) => setDescription(text)}
                 ></TextInput>
             </View>
-            <TouchableOpacity
-                style={styles.camera}
-                onPress={() => Alert.alert("teste")}
-            >
-                <Feather name="camera" size={30} color="#000"></Feather>
-                <Text>Imagens</Text>
-            </TouchableOpacity>
+            <View style={styles.containerCamera}>
+                <TouchableOpacity
+                    style={styles.camera}
+                    onPress={() => Alert.alert("teste")}
+                >
+                    <Feather name="image" size={30} color="#000"></Feather>
+                    <Text>Imagens</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.camera}
+                    onPress={() => Alert.alert("teste")}
+                >
+                    <Feather name="camera" size={30} color="#000"></Feather>
+                    <Text>Câmera</Text>
+                </TouchableOpacity>
+            </View>
+
             <TouchableOpacity
                 style={styles.buttonCreate}
                 onPress={() => Alert.alert("teste")}
@@ -57,7 +67,7 @@ const styles = StyleSheet.create({
     container: {
         padding: 13,
         gap: 20,
-        flex: 1
+        flex: 1,
     },
     containerGroup: {
         gap: 5,
@@ -83,6 +93,10 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         paddingHorizontal: 12,
     },
+    containerCamera: {
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
     camera: {
         borderColor: "#000",
         borderWidth: 1,
@@ -103,10 +117,10 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginTop: "auto",
-        marginBottom: 25
+        marginBottom: 25,
     },
-    labelCreate: { 
-        color: "white", 
+    labelCreate: {
+        color: "white",
         fontSize: 18,
-    }
+    },
 });
