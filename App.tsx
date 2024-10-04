@@ -12,7 +12,7 @@ export default function App() {
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Home" >
                 <Stack.Screen name="Home" component={Tasks} options={{headerShown: false, title: "Tarefas"}} /> 
-                <Stack.Screen name="Task" component={TaskAdd} options={{title: "Nova Tarefa"}} />
+                <Stack.Screen name="Task" component={TaskAdd} options={{title: "Nova Tarefa", presentation: "modal"}} />
             </Stack.Navigator>            
         </NavigationContainer>
 

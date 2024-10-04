@@ -1,4 +1,6 @@
 import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useState } from "react";
 import {
     Alert,
@@ -10,10 +12,15 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+import { RootStackParamList } from "../../routes/routes";
+
+type Props = NativeStackScreenProps<RootStackParamList>;
 
 export function TaskAdd() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+
+    const navigation = useNavigation<Props["navigation"]>();
 
     return (
         <Pressable style={styles.container} onPress={Keyboard.dismiss}>
@@ -53,12 +60,20 @@ export function TaskAdd() {
                 </TouchableOpacity>
             </View>
 
-            <TouchableOpacity
-                style={styles.buttonCreate}
-                onPress={() => Alert.alert("teste")}
-            >
-                <Text style={styles.labelCreate}>Criar nova tarefa</Text>
-            </TouchableOpacity>
+            <View style={styles.containerFooter}>
+                <TouchableOpacity
+                    style={styles.buttonCreate}
+                    onPress={() => Alert.alert("teste")}
+                >
+                    <Text style={styles.labelCreate}>Criar nova tarefa</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.buttonBack}
+                    onPress={() => navigation.goBack()}
+                >
+                    <Text style={styles.labelCreate}>Voltar</Text>
+                </TouchableOpacity>
+            </View>
         </Pressable>
     );
 }
@@ -95,7 +110,7 @@ const styles = StyleSheet.create({
     },
     containerCamera: {
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
     },
     camera: {
         borderColor: "#000",
@@ -111,7 +126,17 @@ const styles = StyleSheet.create({
     },
     buttonCreate: {
         backgroundColor: "#204D29",
-        width: "100%",
+        width: "45%",
+        borderRadius: 20,
+        height: 50,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: "auto",
+        marginBottom: 25,
+    },
+    buttonBack: {
+        backgroundColor: "red",
+        width: "45%",
         borderRadius: 20,
         height: 50,
         alignItems: "center",
@@ -123,4 +148,11 @@ const styles = StyleSheet.create({
         color: "white",
         fontSize: 18,
     },
+    containerFooter: {
+        flexGrow: 1,
+        flexDirection: "row",
+        gap: 10,
+        justifyContent: "space-between",
+        paddingBottom: 20
+    }
 });
