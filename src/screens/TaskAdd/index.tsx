@@ -4,27 +4,28 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useContext, useState } from 'react';
 import { Alert, Keyboard, Pressable, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-import { RootStackParamList } from '../../routes/routes';
-import { styles } from './styles';
 import { TaskContext } from '../../context/TaskContext';
 import { Task } from '../../model/task';
+import { RootStackParamList } from '../../routes/routes';
+import { styles } from './styles';
 
 type Props = NativeStackScreenProps<RootStackParamList>;
 
 export function TaskAdd() {
     const taskContext = useContext(TaskContext);
+    const navigation = useNavigation<Props["navigation"]>();
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
 
-    const navigation = useNavigation<Props["navigation"]>();
-
     function addTask() {
-        const taskAdd  = {
+        const taskAdd = {
             title: title,
-            description: description
+            description: description,
+            done: false,
         } as Task;
-        taskContext.addTask(taskAdd);
+
+        taskContext.createTask(taskAdd);
         setTitle("");
         setDescription("");
     }
@@ -36,7 +37,7 @@ export function TaskAdd() {
                     style={styles.input}
                     value={title}
                     onChangeText={(text) => setTitle(text)}
-                ></TextInput>
+                />
             </View>
             <View style={styles.containerGroup}>
                 <Text style={styles.label}>Descrição</Text>
@@ -47,20 +48,18 @@ export function TaskAdd() {
                     textAlignVertical="top"
                     value={description}
                     onChangeText={(text) => setDescription(text)}
-                ></TextInput>
+                />
             </View>
             <View style={styles.containerCamera}>
                 <TouchableOpacity
                     style={styles.camera}
-                    onPress={() => Alert.alert("teste")}
-                >
+                    onPress={() => Alert.alert("teste")}>
                     <Feather name="image" size={30} color="#000"></Feather>
                     <Text>Imagens</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.camera}
-                    onPress={() => Alert.alert("teste")}
-                >
+                    onPress={() => Alert.alert("teste")}>
                     <Feather name="camera" size={30} color="#000"></Feather>
                     <Text>Câmera</Text>
                 </TouchableOpacity>
@@ -69,14 +68,12 @@ export function TaskAdd() {
             <View style={styles.containerFooter}>
                 <TouchableOpacity
                     style={styles.buttonCreate}
-                    onPress={() => addTask()}
-                >
+                    onPress={() => addTask()}>
                     <Text style={styles.labelCreate}>Criar nova tarefa</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.buttonBack}
-                    onPress={() => navigation.goBack()}
-                >
+                    onPress={() => navigation.goBack()}>
                     <Text style={styles.labelCreate}>Voltar</Text>
                 </TouchableOpacity>
             </View>

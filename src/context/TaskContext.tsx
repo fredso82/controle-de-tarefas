@@ -8,13 +8,15 @@ interface TaskProviderProps {
 
 interface TaskContextProps {
     tasks: Task[];
-    addTask: (task: Task) => void;
+    setTasks: ([]: Task[]) => void;
+    createTask: (task: Task) => void;
     removeTask: (task: Task) => void;
 }
 
 export const TaskContext = createContext<TaskContextProps>({
     tasks: [],
-    addTask: () => {},
+    setTasks: () => {},
+    createTask: () => {},
     removeTask: () => {}
 });
 
@@ -22,42 +24,40 @@ function TaskProvider({ children }: TaskProviderProps) {
     const [tasks, setTasks] = useState<Task[]>([]);
 
     useEffect(() => {
-        //AsyncStorage.removeItem("@Taks");
-        async function loadTaks() {
-            const tasks = await AsyncStorage.getItem("@Taks");
-            if (tasks) {
-                setTasks(JSON.parse(tasks));
-            }
-            //console.log(tasks);
-        }
-
-       // loadTaks();
+        loadTaks();
     }, []);
 
-    async function addTask(task: Task) {
-        // console.log("tasks" as string);
-        // console.log(task ?? {});
-        task.id = tasks.length + 1;
-        const newTaks = [...tasks, task] as Task[];
-        
-        // console.log("Tasks1" as string);
-        // console.log(newTaks ?? []);
-        
-        setTasks(newTaks);
-        await AsyncStorage.setItem("@Taks", JSON.stringify(tasks));
-        
-        // console.log("Tasks2" as string);
-        // console.log(tasks ?? []);
+    useEffect(() => {
+        storeTasks(tasks);
+    }, [tasks]);
+
+    async function loadTaks() {
+        const tasks = await AsyncStorage.getItem("@Tasks");
+        if (tasks) {
+            setTasks(JSON.parse(tasks));
+        }
     }
 
-    async function removeTask(task: Task) {
+    function createTask(task: Task) {
+        task.id = tasks.length + 1;
+        setTasks([...tasks, task]);
+    }
+
+    async function storeTasks(tasks: Task[]) {
+        try {
+            await AsyncStorage.setItem('@Tasks', JSON.stringify(tasks))
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    function removeTask(task: Task) {
         const newTasks = tasks.filter(t => t.id !== task.id);
         setTasks(newTasks);
-        await AsyncStorage.setItem("@Tasks", JSON.stringify(newTasks));
     }
 
     return (
-        <TaskContext.Provider value={{tasks, addTask, removeTask}}>
+        <TaskContext.Provider value={{tasks, setTasks, createTask, removeTask}}>
             {children}
         </TaskContext.Provider>
     );
