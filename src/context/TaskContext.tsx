@@ -7,6 +7,8 @@ interface TaskProviderProps {
 }
 
 interface TaskContextProps {
+    selectedTask: Task;
+    selectTask: (task: Task) => void;
     tasks: Task[];
     setTasks: ([]: Task[]) => void;
     createTask: (task: Task) => void;
@@ -14,13 +16,16 @@ interface TaskContextProps {
 }
 
 export const TaskContext = createContext<TaskContextProps>({
+    selectedTask: {} as Task,
+    selectTask: () => {},
     tasks: [],
     setTasks: () => {},
     createTask: () => {},
     removeTask: () => {}
 });
 
-function TaskProvider({ children }: TaskProviderProps) {
+export default function TaskProvider({ children }: TaskProviderProps) {
+    const [selectedTask, setSelectedTask] = useState<Task>({} as Task);
     const [tasks, setTasks] = useState<Task[]>([]);
 
     useEffect(() => {
@@ -56,11 +61,13 @@ function TaskProvider({ children }: TaskProviderProps) {
         setTasks(newTasks);
     }
 
+    function selectTask(task: Task) {
+        setSelectedTask(task);
+    }
+
     return (
-        <TaskContext.Provider value={{tasks, setTasks, createTask, removeTask}}>
+        <TaskContext.Provider value={{selectedTask, selectTask, tasks, setTasks, createTask, removeTask}}>
             {children}
         </TaskContext.Provider>
     );
 }
-
-export default TaskProvider;

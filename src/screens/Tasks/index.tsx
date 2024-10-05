@@ -14,7 +14,7 @@ import { TaskContext } from '../../context/TaskContext';
 type Props = NativeStackScreenProps<RootStackParamList>;
 
 export function Tasks() {
-    const {tasks, setTasks} = useContext(TaskContext);
+    const {tasks, setTasks, selectTask} = useContext(TaskContext);
     const navigation = useNavigation<Props['navigation']>();
 
 
@@ -42,6 +42,11 @@ export function Tasks() {
         }
     }
 
+    function handleSelectTask(task: Task) {
+        selectTask(task);
+        navigation.navigate("Details");
+    }
+
     function changeTaskStatus(taskChanged: Task) {
         let newTasks = [...tasks];
         const index = newTasks.findIndex((t) => t.id === taskChanged.id);
@@ -65,7 +70,7 @@ export function Tasks() {
                         renderItem={({ item }) => (
                             <TaskItem
                                 task={item}
-                                onPress={() => alert("press")}
+                                onPress={handleSelectTask}
                                 onStatusChange={changeTaskStatus}
                             />
                         )}
@@ -82,14 +87,14 @@ export function Tasks() {
                         renderItem={({ item }) => (
                             <TaskItem
                                 task={item}
-                                onPress={() => alert("press")}
+                                onPress={handleSelectTask}
                                 onStatusChange={changeTaskStatus}
                             />
                         )}
                     />
                 </View>
             )}
-            <TouchableOpacity style={styles.addTask} onPress={() => navigation.navigate('Task') }>
+            <TouchableOpacity style={styles.addTask} onPress={() => navigation.navigate('TaskAdd') }>
                 <Feather name='plus' size={40} color='white'></Feather>
             </TouchableOpacity>
         </Pressable>

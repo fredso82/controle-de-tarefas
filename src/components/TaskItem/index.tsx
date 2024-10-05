@@ -5,13 +5,13 @@ import { useState } from "react";
 
 export interface TaskProps {
     task: Task;
-    onPress: () => void;
+    onPress: (task: Task) => void;
     onStatusChange: (taskChanged: Task) => void;
 }
 
 export function TaskItem(props: TaskProps) {
     return (
-        <Pressable onPress={props.onPress} style={styles.container}>
+        <Pressable onPress={() => props.onPress(props.task)} style={styles.container}>
             <Checkbox style={styles.checkbox}
                 value={props.task.done}
                 onValueChange={() => {

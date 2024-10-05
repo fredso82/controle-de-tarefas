@@ -1,4 +1,5 @@
 export type RootStackParamList = {
     Home: undefined;
-    Task: undefined;
+    TaskAdd: undefined;
+    Details: undefined;
 };
