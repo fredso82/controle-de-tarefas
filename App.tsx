@@ -7,11 +7,13 @@ import { TaskAdd } from './src/screens/TaskAdd';
 import { TaskDetails } from './src/screens/TaskDetails';
 import { Tasks } from './src/screens/Tasks';
 import Toast from 'react-native-toast-message';
+import { StatusBar } from 'expo-status-bar';
 
 export default function App() {
     const Stack = createNativeStackNavigator();
     return (
         <TaskProvider>
+            <StatusBar />
             <NavigationContainer>
                 <Stack.Navigator initialRouteName="Home" >
                     <Stack.Screen name="Home" component={Tasks} options={{ title: "Tarefas", headerTitleAlign: "center"}} /> 
