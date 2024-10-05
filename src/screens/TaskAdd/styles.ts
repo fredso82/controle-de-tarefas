@@ -66,7 +66,7 @@ export const styles = StyleSheet.create({
         marginTop: "auto",
         marginBottom: 25,
     },
-    labelCreate: {
+    labelButton: {
         color: "white",
         fontSize: 18,
     },

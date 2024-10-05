@@ -69,12 +69,12 @@ export function TaskAdd() {
                 <TouchableOpacity
                     style={styles.buttonCreate}
                     onPress={() => addTask()}>
-                    <Text style={styles.labelCreate}>Criar nova tarefa</Text>
+                    <Text style={styles.labelButton}>Criar nova tarefa</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.buttonBack}
                     onPress={() => navigation.goBack()}>
-                    <Text style={styles.labelCreate}>Voltar</Text>
+                    <Text style={styles.labelButton}>Voltar</Text>
                 </TouchableOpacity>
             </View>
         </Pressable>
