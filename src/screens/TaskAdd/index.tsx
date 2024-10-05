@@ -8,6 +8,7 @@ import { TaskContext } from '../../context/TaskContext';
 import { Task } from '../../model/task';
 import { RootStackParamList } from '../../routes/routes';
 import { styles } from './styles';
+import Toast from 'react-native-toast-message';
 
 type Props = NativeStackScreenProps<RootStackParamList>;
 
@@ -28,6 +29,10 @@ export function TaskAdd() {
         taskContext.createTask(taskAdd);
         setTitle("");
         setDescription("");
+        Toast.show({
+            type: "success",
+            text1: "Tarefa cadastrada com sucesso!",
+        })
     }
     return (
         <Pressable style={styles.container} onPress={Keyboard.dismiss}>
@@ -71,11 +76,11 @@ export function TaskAdd() {
                     onPress={() => addTask()}>
                     <Text style={styles.labelButton}>Criar nova tarefa</Text>
                 </TouchableOpacity>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                     style={styles.buttonBack}
                     onPress={() => navigation.goBack()}>
                     <Text style={styles.labelButton}>Voltar</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
         </Pressable>
     );

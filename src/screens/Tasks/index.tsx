@@ -17,14 +17,12 @@ export function Tasks() {
     const {tasks, setTasks, selectTask} = useContext(TaskContext);
     const navigation = useNavigation<Props['navigation']>();
 
-
     const [tasksToDo, setTasksToDo] = useState<Task[] | null>();
     const [tasksDone, setTasksDone] = useState<Task[] | null>();
 
     useEffect(() => {
         setTasksToDo(tasks?.filter((t) => !t.done));
         setTasksDone(tasks?.filter((t) => t.done));
-
     }, [tasks]);
 
     function filter(filterType: FilterType) {
@@ -59,8 +57,29 @@ export function Tasks() {
     return (
         <Pressable style={styles.container} onPress={Keyboard.dismiss}>
             <TaskFilter onPress={filter} />
-
-            {tasksToDo && tasksToDo.length > 0 &&  (
+            
+            <View style={styles.containerTasks}>                
+                <FlatList
+                    scrollEnabled={true}
+                    data={tasks}
+                    keyExtractor={(item, index) => item.id.toString()}
+                    renderItem={({ item }) => (
+                        <TaskItem
+                            task={item}
+                            onPress={handleSelectTask}
+                            onStatusChange={changeTaskStatus}
+                        />
+                    )}
+                    ListEmptyComponent={() => (                        
+                        <View style={{ marginBottom: 20 }}>
+                            <Text style={styles.labelEmptyTasks}>
+                                Você não possui tarefas!!!!
+                            </Text>                            
+                        </View>
+                    )}
+                />
+            </View>
+            {/* {tasksToDo && tasksToDo.length > 0 &&  (
                 <View style={styles.containerTasks}>
                     <Text style={styles.titleToDo}>A Fazer</Text>
                     <FlatList
@@ -93,7 +112,7 @@ export function Tasks() {
                         )}
                     />
                 </View>
-            )}
+            )} */}
             <TouchableOpacity style={styles.addTask} onPress={() => navigation.navigate('TaskAdd') }>
                 <Feather name='plus' size={40} color='white'></Feather>
             </TouchableOpacity>

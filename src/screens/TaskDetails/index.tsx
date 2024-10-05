@@ -6,6 +6,7 @@ import { styles } from './styles';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../routes/routes';
+import Toast from 'react-native-toast-message';
 
 type Props = NativeStackScreenProps<RootStackParamList>;
 
@@ -15,6 +16,10 @@ export function TaskDetails() {
     
     function handleRemoveTask() {
         removeTask(selectedTask);
+        Toast.show({
+            type: "success",
+            text1: "Tarefa excluída com sucesso!",
+        })
         navigation.goBack();
     }
 
@@ -25,11 +30,11 @@ export function TaskDetails() {
                 <Text style={styles.taskDescription}>{selectedTask.description}</Text>
             </View>
             <View style={styles.containerFooter}>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                     style={styles.buttonDone}
                     onPress={() => Alert.alert("done")}>
                     <Text style={styles.labelButton}>Finalizar</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <TouchableOpacity
                     style={styles.buttonDelete}
                     onPress={handleRemoveTask}>

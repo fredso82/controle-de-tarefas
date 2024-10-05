@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
         backgroundColor: "#FAFAFA",
         alignItems: "center",
         justifyContent: "flex-start",
-        paddingTop: 64,
+        paddingTop: 10,
     },
     containerTasks: {
         flex: 1,
@@ -42,5 +42,11 @@ export const styles = StyleSheet.create({
         right: "5%",
         shadowOffset: {width: 3, height: 4},        
         elevation: 5
+    },
+    labelEmptyTasks: { 
+        color: "black", 
+        textAlign: "center", 
+        fontSize: 22, 
+        fontWeight: "bold" 
     }
 });

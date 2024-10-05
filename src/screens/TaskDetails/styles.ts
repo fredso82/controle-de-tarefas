@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
         fontWeight: "bold"
     },
     taskDescription: {
-        fontSize: 19
+        fontSize: 18
     },
     containerFooter: {
         width: "100%",
@@ -29,23 +29,23 @@ export const styles = StyleSheet.create({
         justifyContent: "space-between",
         paddingBottom: 20
     },
-    buttonDone: {
-        backgroundColor: "#204D29",
-        width: "45%",
-        borderRadius: 20,
-        height: 50,
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: "auto",
-        marginBottom: 25,
-    },
+    // buttonDone: {
+    //     backgroundColor: "#204D29",
+    //     width: "45%",
+    //     borderRadius: 20,
+    //     height: 50,
+    //     alignItems: "center",
+    //     justifyContent: "center",
+    //     marginTop: "auto",
+    //     marginBottom: 25,
+    // },
     labelButton: {
         color: "white",
         fontSize: 18,
     },
     buttonDelete: {
         backgroundColor: "#FC1E1E",
-        width: "45%",
+        width: "100%",
         borderRadius: 20,
         height: 50,
         alignItems: "center",
