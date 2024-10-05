@@ -5,17 +5,19 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { TaskAdd } from "./src/screens/TaskAdd";
 import React from "react";
+import TaskProvider from "./src/context/TaskContext";
 
 export default function App() {
     const Stack = createNativeStackNavigator();
     return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName="Home" >
-                <Stack.Screen name="Home" component={Tasks} options={{headerShown: false, title: "Tarefas"}} /> 
-                <Stack.Screen name="Task" component={TaskAdd} options={{title: "Nova Tarefa", presentation: "modal"}} />
-            </Stack.Navigator>            
-        </NavigationContainer>
-
+        <TaskProvider>
+            <NavigationContainer>
+                <Stack.Navigator initialRouteName="Home" >
+                    <Stack.Screen name="Home" component={Tasks} options={{headerShown: false, title: "Tarefas"}} /> 
+                    <Stack.Screen name="Task" component={TaskAdd} options={{title: "Nova Tarefa", presentation: "modal"}} />
+                </Stack.Navigator>            
+            </NavigationContainer>
+        </TaskProvider>
         // <View style={styles.container}>
         //   <Text>Open up App.tsx to start working on your app!</Text>
         //   <StatusBar style="auto" />
