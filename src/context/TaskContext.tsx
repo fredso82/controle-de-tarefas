@@ -37,6 +37,8 @@ export default function TaskProvider({ children }: TaskProviderProps) {
     }, [tasks]);
 
     async function loadTaks() {
+        //await AsyncStorage.clear();
+
         const tasks = await AsyncStorage.getItem("@Tasks");
         if (tasks) {
             setTasks(JSON.parse(tasks));
@@ -50,6 +52,7 @@ export default function TaskProvider({ children }: TaskProviderProps) {
 
     async function storeTasks(tasks: Task[]) {
         try {
+            
             await AsyncStorage.setItem('@Tasks', JSON.stringify(tasks))
         } catch (error) {
             console.log(error);

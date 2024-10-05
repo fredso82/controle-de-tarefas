@@ -15,27 +15,30 @@ type Props = NativeStackScreenProps<RootStackParamList>;
 
 export function Tasks() {
     const {tasks, setTasks, selectTask} = useContext(TaskContext);
+    const [orderedTasks, setOrderedTasks] = useState([] as Task[]);
     const navigation = useNavigation<Props['navigation']>();
 
-    const [tasksToDo, setTasksToDo] = useState<Task[] | null>();
-    const [tasksDone, setTasksDone] = useState<Task[] | null>();
-
     useEffect(() => {
-        setTasksToDo(tasks?.filter((t) => !t.done));
-        setTasksDone(tasks?.filter((t) => t.done));
+        const tasksDone = tasks.filter((t) => !t.done);
+        const tasksNotDone = tasks.filter((t) => t.done);
+        setOrderedTasks(tasksDone.concat(tasksNotDone));
     }, [tasks]);
 
     function filter(filterType: FilterType) {
-        setTasksToDo(tasks?.filter((t) => !t.done));
-        setTasksDone(tasks?.filter((t) => t.done));
+        const tasksDone = tasks.filter((t) => !t.done);
+        const tasksNotDone = tasks.filter((t) => t.done);
 
         switch (filterType) {
             case FilterType.ToDo:
-                setTasksDone(null);
+                setOrderedTasks(tasksNotDone);
                 break;
 
             case FilterType.Done:
-                setTasksToDo(null);
+                setOrderedTasks(tasksDone);
+                break;
+
+            default:
+                setOrderedTasks(tasksDone.concat(tasksNotDone));
                 break;
         }
     }
@@ -57,11 +60,10 @@ export function Tasks() {
     return (
         <Pressable style={styles.container} onPress={Keyboard.dismiss}>
             <TaskFilter onPress={filter} />
-            
             <View style={styles.containerTasks}>                
                 <FlatList
                     scrollEnabled={true}
-                    data={tasks}
+                    data={orderedTasks}
                     keyExtractor={(item, index) => item.id.toString()}
                     renderItem={({ item }) => (
                         <TaskItem
@@ -79,40 +81,6 @@ export function Tasks() {
                     )}
                 />
             </View>
-            {/* {tasksToDo && tasksToDo.length > 0 &&  (
-                <View style={styles.containerTasks}>
-                    <Text style={styles.titleToDo}>A Fazer</Text>
-                    <FlatList
-                        scrollEnabled={true}
-                        data={tasksToDo}
-                        keyExtractor={(item, index) => item.id.toString()}
-                        renderItem={({ item }) => (
-                            <TaskItem
-                                task={item}
-                                onPress={handleSelectTask}
-                                onStatusChange={changeTaskStatus}
-                            />
-                        )}
-                    />
-                </View>
-            )}
-            {tasksDone && tasksDone.length > 0 && (
-                <View style={styles.containerTasks}>
-                    <Text style={styles.titleDone}>Feitas</Text>
-                    <FlatList
-                        scrollEnabled={true}
-                        data={tasksDone}
-                        keyExtractor={(item, index) => item.id.toString()}
-                        renderItem={({ item }) => (
-                            <TaskItem
-                                task={item}
-                                onPress={handleSelectTask}
-                                onStatusChange={changeTaskStatus}
-                            />
-                        )}
-                    />
-                </View>
-            )} */}
             <TouchableOpacity style={styles.addTask} onPress={() => navigation.navigate('TaskAdd') }>
                 <Feather name='plus' size={40} color='white'></Feather>
             </TouchableOpacity>
