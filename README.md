@@ -14,4 +14,4 @@ A aplicação foi desenvolvida utilizando AsyncStorage e react navigation. Foram
 - Exclusão de tarefas
 - Detalhes da tarefa, exibindo a imagem armazenada
 
-Figma da aplicação: https://www.figma.com/design/2m7hYo8lkYjUHm1ecnzXqD/Atividade?node-id=0-1&t=sDW9ovsniHFrTiln-1
+[Figma da aplicação](https://www.figma.com/design/2m7hYo8lkYjUHm1ecnzXqD/Atividade?node-id=0-1&t=sDW9ovsniHFrTiln-1)
