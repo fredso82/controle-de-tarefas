@@ -1,15 +1,15 @@
 import { Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useContext, useEffect, useState } from 'react';
-import { FlatList, Keyboard, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Keyboard, Pressable, Text, TouchableOpacity, View } from 'react-native';
 
 import { FilterType, TaskFilter } from '../../components/TaskFilter';
 import { TaskItem } from '../../components/TaskItem';
+import { TaskContext } from '../../context/TaskContext';
 import { Task } from '../../model/task';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../routes/routes';
 import { styles } from './styles';
-import { TaskContext } from '../../context/TaskContext';
 
 type Props = NativeStackScreenProps<RootStackParamList>;
 
