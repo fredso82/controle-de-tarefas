@@ -29,6 +29,19 @@ export const styles = StyleSheet.create({
         justifyContent: "space-between",
         paddingBottom: 20
     },
+    cardImage: {
+        marginTop: 10,
+        alignItems: "center",
+        backgroundColor: "#FFF",
+        width: "100%",
+        shadowOffset: { width: 3, height: 4 },
+        elevation: 5,
+        padding: 10
+    },
+    image: {
+        width: 300,
+        height: 300,
+    },
     // buttonDone: {
     //     backgroundColor: "#204D29",
     //     width: "45%",

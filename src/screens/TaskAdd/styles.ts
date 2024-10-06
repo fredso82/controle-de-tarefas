@@ -1,3 +1,4 @@
+import { cloneElement } from 'react';
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
@@ -23,7 +24,7 @@ export const styles = StyleSheet.create({
         borderColor: "#000",
     },
     textArea: {
-        height: 235,
+        height: 160,
         borderWidth: 1,
         borderRadius: 20,
         borderColor: "#000",
@@ -55,6 +56,13 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         marginTop: "auto",
         marginBottom: 25,
+    },
+    containerImage: {        
+        alignItems: "center"
+    },
+    image: {
+        width: 300,
+        height: 300,
     },
     // buttonBack: {
     //     backgroundColor: "red",
