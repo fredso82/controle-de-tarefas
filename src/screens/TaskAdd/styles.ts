@@ -4,8 +4,10 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
     container: {
         padding: 13,
-        gap: 20,
         flex: 1,
+    },
+    form: {
+        gap: 20,
     },
     containerGroup: {
         gap: 5,
