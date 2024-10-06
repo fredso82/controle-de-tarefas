@@ -2,7 +2,7 @@ import { Feather } from '@expo/vector-icons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import * as ImagePicker from 'expo-image-picker';
 import { useContext, useState } from 'react';
-import { Image, Keyboard, Pressable, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, Keyboard, Pressable, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Toast from 'react-native-toast-message';
 
 import { TaskContext } from '../../context/TaskContext';
@@ -53,6 +53,15 @@ export function TaskAdd() {
     };
 
     async function addTask() {
+        if (title.trim() === "") {
+            Alert.alert("Atenção!", "Informe o título da tarefa");
+            return;
+        }
+
+        if (taskContext.tasks.some((t) => t.title.trim().toUpperCase() === title.trim().toLocaleUpperCase())) {
+            Alert.alert("Atenção!", "Já existe uma tarefa com esse título");
+            return;
+        }
         const taskAdd = {
             title: title,
             description: description,
