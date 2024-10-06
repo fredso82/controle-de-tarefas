@@ -7,7 +7,7 @@ Aplicação desenvolvida como projeto da trilha Desenvolvimento Mobile da RESTIC
 3. Execute: `npx expo start`
 
 ## Funcionalidades implementadas
-A aplicação foi desenvolvida utilizando AsyncStorage e react navigation. Foram implementadas as seguinte funcionalidades:
+A aplicação foi desenvolvida utilizando AsyncStorage, react navigation e validação com Formik. Foram implementadas as seguinte funcionalidades:
 - Listagem de tarefas com filtros por status
 - Inclusão de tarefas armazenando os dados com AsyncStorage
 - Integração com a câmera e galeria de imagens do dispositivo
