@@ -22,9 +22,6 @@ export function TaskDetails() {
         });
         navigation.goBack();
     }
-    useEffect(() => {
-        console.log(selectedTask.image);
-    }, []);
 
     return (
         <View style={styles.container}>
