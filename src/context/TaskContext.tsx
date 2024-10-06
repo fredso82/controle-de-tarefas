@@ -1,6 +1,7 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
-import { Task } from "../model/task";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createContext, ReactNode, useEffect, useState } from 'react';
+
+import { Task } from '../model/task';
 
 interface TaskProviderProps {
     children: ReactNode;
