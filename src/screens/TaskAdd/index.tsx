@@ -14,7 +14,6 @@ import {
     View,
 } from "react-native";
 import Toast from "react-native-toast-message";
-
 import { TaskContext } from "../../context/TaskContext";
 import { Task } from "../../model/task";
 import { RootStackParamList } from "../../routes/routes";
