@@ -25,8 +25,8 @@ export function Tasks() {
     }, [tasks]);
 
     function filter(filterType: FilterType) {
-        const tasksDone = tasks.filter((t) => !t.done);
-        const tasksNotDone = tasks.filter((t) => t.done);
+        const tasksDone = tasks.filter((t) => t.done);
+        const tasksNotDone = tasks.filter((t) => !t.done);
 
         switch (filterType) {
             case FilterType.ToDo:
