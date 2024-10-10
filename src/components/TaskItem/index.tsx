@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import { Task } from "../../model/task";
 import Checkbox from "expo-checkbox";
 import { useState } from "react";
+import * as Animatable from 'react-native-animatable';
 
 export interface TaskProps {
     task: Task;
@@ -11,17 +12,19 @@ export interface TaskProps {
 
 export function TaskItem(props: TaskProps) {
     return (
-        <Pressable onPress={() => props.onPress(props.task)} style={styles.container}>
-            <Checkbox style={styles.checkbox}
-                value={props.task.done}
-                onValueChange={() => {
-                    props.onStatusChange(props.task);
-                }}
-            />
-            {props.task.done && <Text style={{textDecorationLine: "line-through"}}>{props.task.title}</Text>}
-            {!props.task.done && <Text>{props.task.title}</Text>}
-            
-        </Pressable>
+        <Animatable.View animation="fadeIn">
+            <Pressable onPress={() => props.onPress(props.task)} style={styles.container}>
+                <Checkbox style={styles.checkbox}
+                    value={props.task.done}
+                    onValueChange={() => {
+                        props.onStatusChange(props.task);
+                    }}
+                />
+                {props.task.done && <Text style={{ textDecorationLine: "line-through" }}>{props.task.title}</Text>}
+                {!props.task.done && <Text>{props.task.title}</Text>}
+
+            </Pressable>
+        </Animatable.View>
     );
 }
 const styles = StyleSheet.create({
@@ -37,7 +40,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
     },
     checkbox: {
-        transform: [{scaleX: 1.1}, {scaleY: 1.1}],
+        transform: [{ scaleX: 1.1 }, { scaleY: 1.1 }],
         borderRadius: 50
     }
 });

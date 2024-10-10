@@ -10,11 +10,12 @@ import { TaskContext } from '../../context/TaskContext';
 import { Task } from '../../model/task';
 import { RootStackParamList } from '../../routes/routes';
 import { styles } from './styles';
+import * as Animatable from 'react-native-animatable';
 
 type Props = NativeStackScreenProps<RootStackParamList>;
 
 export function Tasks() {
-    const {tasks, setTasks, selectTask} = useContext(TaskContext);
+    const { tasks, setTasks, selectTask } = useContext(TaskContext);
     const [orderedTasks, setOrderedTasks] = useState([] as Task[]);
     const navigation = useNavigation<Props['navigation']>();
 
@@ -59,31 +60,35 @@ export function Tasks() {
 
     return (
         <Pressable style={styles.container} onPress={Keyboard.dismiss}>
-            <TaskFilter onPress={filter} />
-            <View style={styles.containerTasks}>                
+            <Animatable.View animation="fadeInDown" >
+                <TaskFilter onPress={filter} />
+            </Animatable.View>
+            <View style={styles.containerTasks}>
                 <FlatList
                     scrollEnabled={true}
                     data={orderedTasks}
                     keyExtractor={(item, index) => item.id.toString()}
-                    renderItem={({ item }) => (
+                    renderItem={({ item, index }) => (
                         <TaskItem
                             task={item}
                             onPress={handleSelectTask}
                             onStatusChange={changeTaskStatus}
                         />
                     )}
-                    ListEmptyComponent={() => (                        
+                    ListEmptyComponent={() => (
                         <View style={{ marginBottom: 20 }}>
                             <Text style={styles.labelEmptyTasks}>
                                 Você não possui tarefas!!!!
-                            </Text>                            
+                            </Text>
                         </View>
                     )}
                 />
             </View>
-            <TouchableOpacity style={styles.addTask} onPress={() => navigation.navigate('TaskAdd') }>
-                <Feather name='plus' size={40} color='white'></Feather>
-            </TouchableOpacity>
+            <Animatable.View animation="fadeInDown" delay={500} style={styles.addTask}>
+                <TouchableOpacity  onPress={() => navigation.navigate('TaskAdd')}>
+                    <Feather name='plus' size={40} color='white'></Feather>
+                </TouchableOpacity>
+            </Animatable.View>
         </Pressable>
     );
 }
